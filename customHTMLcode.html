@@ -1,0 +1,37 @@
+<html>
+
+<body>
+<div class="panel-heading bg-info p-t-10 p-b-10">    
+<img class="lazyload homepageImageTitle loaded" data-src="plugins/images/tabs/Bed.png" src="plugins/images/tabs/Bed.png" data-was-processed="true">   <span lang="en">BEDTIME</span>
+</div>
+<p>Any streams started from this time to an hour after will be cancelled Make sure to hit the button after entering a time. Press reset, ok, and hit the button to have no bedtime.</p>
+<form id="form" action="" method="POST">
+  <p><input type="time" name="date_1" id="datetimepicker1"></p>
+  <p><input type="submit" value="Set Bed Time" /></p>
+</form>
+<div id="AjaxResult"></div>
+
+<script type="text/javascript">
+var user = activeInfo.user.username
+$(document).ready(function(){
+  $(\'#form\').on(\'submit\', function(e){
+    e.preventDefault();
+    data = $(this).serialize();
+    $.ajax({
+      url:"report.php",
+      type: "POST",
+      headers: {
+        \'user\': user
+      },
+      data: data,
+      success: function(data){
+        $(\'#AjaxResult\').html(data);
+      }
+    });
+  });
+});
+</script>
+
+
+</body>
+</html>
